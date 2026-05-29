@@ -1,0 +1,511 @@
+/* =============================================================================
+ * OWASP Top 10 for LLM Applications (2025) — styles
+ * System fonts only, no external assets, WCAG AA contrast.
+ * ========================================================================== */
+
+:root {
+  /* Color tokens — chosen for AA contrast on the dark surface. */
+  --bg: #0d1117;
+  --surface: #161d27;
+  --surface-2: #202834;
+  --border: #2c3949;
+  --border-soft: #232f3d;
+  --text: #e9eef4;
+  --text-dim: #9fb0c0;
+  --accent: #5fb0ff;
+  --accent-strong: #2b86ff;
+  --ok: #41e0a3;
+  --ok-bg: #0f2a20;
+  --bad: #ff7a7a;
+  --bad-bg: #321a1d;
+  --warn: #ffd166;
+  --warn-bg: #322811;
+  --focus: #ffd24a;
+  --code-bg: #0a0e14;
+  --radius: 12px;
+  --shadow: 0 1px 2px rgba(0, 0, 0, 0.4), 0 8px 28px -12px rgba(0, 0, 0, 0.55);
+  --shadow-glow: 0 0 0 1px rgba(95, 176, 255, 0.18), 0 10px 30px -10px rgba(43, 134, 255, 0.35);
+  --mono: ui-monospace, "SF Mono", "JetBrains Mono", "Cascadia Code", Menlo, Consolas, monospace;
+  --maxw: 880px;
+}
+
+* { box-sizing: border-box; }
+
+html { -webkit-text-size-adjust: 100%; }
+
+body {
+  margin: 0;
+  background-color: var(--bg);
+  /* Layered, fully-offline texture: two soft accent glows over a faint dot grid. */
+  background-image:
+    radial-gradient(900px circle at 12% -8%, rgba(43, 134, 255, 0.14), transparent 55%),
+    radial-gradient(800px circle at 98% 4%, rgba(65, 224, 163, 0.07), transparent 50%),
+    radial-gradient(rgba(255, 255, 255, 0.04) 1px, transparent 1px);
+  background-size: auto, auto, 22px 22px;
+  background-position: 0 0, 0 0, 0 0;
+  background-attachment: fixed;
+  color: var(--text);
+  font-family: system-ui, -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  line-height: 1.55;
+  font-size: 16px;
+}
+
+/* Visible focus for keyboard users everywhere. */
+:focus-visible {
+  outline: 3px solid var(--focus);
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+
+/* Skip link for screen-reader / keyboard users. */
+.skip-link {
+  position: absolute;
+  left: -999px;
+  top: 0;
+  background: var(--accent-strong);
+  color: #fff;
+  padding: 0.6rem 1rem;
+  z-index: 100;
+}
+.skip-link:focus { left: 0; }
+
+.wrap {
+  max-width: var(--maxw);
+  margin: 0 auto;
+  padding: 1.25rem;
+}
+
+/* ---------- Header / tabs ---------- */
+header.site {
+  border-bottom: 1px solid var(--border);
+  background:
+    radial-gradient(1100px circle at 20% -120%, rgba(43, 134, 255, 0.22), transparent 60%),
+    linear-gradient(180deg, rgba(22, 29, 39, 0.85), rgba(13, 17, 23, 0.4));
+  backdrop-filter: blur(2px);
+}
+.site h1 {
+  font-size: 1.55rem;
+  margin: 0 0 0.3rem;
+  letter-spacing: -0.02em;
+  font-weight: 800;
+}
+.site h1 .accent-dot {
+  color: var(--accent);
+  margin: 0 0.15rem;
+}
+.site .subtitle {
+  color: var(--text-dim);
+  margin: 0 0 1rem;
+  font-size: 0.95rem;
+}
+
+.tablist {
+  display: flex;
+  gap: 0.5rem;
+  border-bottom: 1px solid var(--border);
+}
+.tab {
+  appearance: none;
+  background: transparent;
+  border: none;
+  border-bottom: 3px solid transparent;
+  color: var(--text-dim);
+  font: inherit;
+  font-weight: 600;
+  padding: 0.7rem 1rem;
+  cursor: pointer;
+}
+.tab[aria-selected="true"] {
+  color: var(--text);
+  border-bottom-color: var(--accent);
+}
+.tab:hover { color: var(--text); }
+
+/* ---------- Generic ---------- */
+h2 {
+  font-size: 1.35rem;
+  margin-top: 0;
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  letter-spacing: -0.01em;
+}
+/* Accent tick before each section heading. */
+h2::before {
+  content: "";
+  width: 4px;
+  height: 1.1em;
+  border-radius: 2px;
+  background: linear-gradient(180deg, var(--accent), var(--accent-strong));
+  flex: none;
+}
+.lead { color: var(--text-dim); }
+
+.btn {
+  appearance: none;
+  font: inherit;
+  font-weight: 600;
+  border-radius: var(--radius);
+  padding: 0.65rem 1.15rem;
+  cursor: pointer;
+  border: 1px solid transparent;
+  transition: transform 0.12s ease, background 0.15s ease, box-shadow 0.15s ease;
+}
+.btn:active { transform: translateY(1px); }
+.btn--primary {
+  background: linear-gradient(180deg, var(--accent), var(--accent-strong));
+  color: #fff;
+  box-shadow: 0 6px 18px -8px rgba(43, 134, 255, 0.7);
+}
+.btn--primary:hover { filter: brightness(1.08); box-shadow: 0 8px 22px -8px rgba(43, 134, 255, 0.85); }
+.btn--ghost {
+  background: transparent;
+  color: var(--text);
+  border-color: var(--border);
+}
+.btn--ghost:hover { background: var(--surface-2); }
+
+/* ---------- Learn: accordion cards ---------- */
+.learn-toolbar {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 1rem;
+}
+.learn-toolbar .btn { font-size: 0.85rem; padding: 0.4rem 0.85rem; }
+#learn-cards {
+  display: grid;
+  gap: 0.75rem;
+  margin-top: 0.75rem;
+}
+.risk-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  overflow: hidden;
+  box-shadow: var(--shadow);
+  transition: border-color 0.15s ease, box-shadow 0.15s ease, transform 0.15s ease;
+}
+.risk-card:hover { border-color: #3a4a5e; transform: translateY(-1px); }
+.risk-card:has(.risk-card__toggle[aria-expanded="true"]) {
+  border-color: rgba(95, 176, 255, 0.4);
+  box-shadow: var(--shadow-glow);
+}
+.risk-card__heading { margin: 0; }
+.risk-card__toggle {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  background: transparent;
+  border: none;
+  color: var(--text);
+  font: inherit;
+  text-align: left;
+  padding: 1rem 1.1rem;
+  cursor: pointer;
+}
+.risk-card__toggle:hover { background: var(--surface-2); }
+.risk-card__id {
+  font-variant-numeric: tabular-nums;
+  font-weight: 700;
+  color: var(--accent);
+  font-size: 0.85rem;
+  white-space: nowrap;
+}
+.risk-card__name { font-weight: 600; flex: 1; }
+.risk-card__chevron {
+  transition: transform 0.18s ease;
+  color: var(--text-dim);
+  font-size: 0.8rem;
+}
+.risk-card__toggle[aria-expanded="true"] .risk-card__chevron {
+  transform: rotate(180deg);
+}
+.risk-card__panel {
+  padding: 0 1.1rem 1.1rem;
+  border-top: 1px solid var(--border);
+}
+.risk-card__def { margin-top: 0.9rem; }
+.risk-card__example { color: var(--text); background: var(--surface-2);
+  padding: 0.6rem 0.8rem; border-radius: 8px; border: 1px solid var(--border-soft); }
+
+/* "What it looks like" — terminal/code demo block. */
+.risk-card__demo {
+  margin: 0.9rem 0 0;
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  background: var(--code-bg);
+  overflow: hidden;
+}
+.risk-card__demo figcaption {
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--text-dim);
+  padding: 0.45rem 0.85rem;
+  border-bottom: 1px solid var(--border);
+  background: linear-gradient(180deg, rgba(95, 176, 255, 0.08), transparent);
+}
+/* Faux traffic-light dots in the demo header. */
+.risk-card__demo figcaption::before {
+  content: "";
+  display: inline-block;
+  width: 8px; height: 8px;
+  border-radius: 50%;
+  margin-right: 1.45rem;
+  background: #ff5f57;
+  box-shadow: 0.8rem 0 0 #febc2e, 1.6rem 0 0 #28c840;
+  vertical-align: middle;
+}
+.risk-card__demo pre {
+  margin: 0;
+  padding: 0.85rem 1rem;
+  overflow-x: auto;
+  font-family: var(--mono);
+  font-size: 0.82rem;
+  line-height: 1.6;
+  color: #cfe3ff;
+  white-space: pre;
+  -webkit-overflow-scrolling: touch;
+}
+
+.risk-card__mit { margin-top: 1rem; }
+.risk-card__mit ul { margin: 0.4rem 0 0; padding-left: 1.2rem; }
+.risk-card__mit li { margin-bottom: 0.25rem; }
+
+/* ---------- Quiz ---------- */
+.quiz-intro { margin-top: 1rem; }
+
+/* The runner and results are unified "quiz boxes" — everything (progress, the
+ * question, feedback, and actions) lives inside one bordered, elevated card. */
+#quiz-runner, #quiz-results {
+  margin-top: 1rem;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  padding: 1.25rem;
+}
+#quiz-runner[hidden], #quiz-results[hidden] { display: none; }
+
+.callout {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-left: 4px solid var(--accent);
+  border-radius: var(--radius);
+  padding: 0.9rem 1rem;
+  margin: 1rem 0;
+}
+#intro-best, .best-score { color: var(--text-dim); }
+
+/* Progress */
+.quiz-progress { margin-bottom: 1rem; }
+.quiz-progress__bar {
+  height: 8px;
+  background: var(--surface-2);
+  border-radius: 999px;
+  overflow: hidden;
+}
+.quiz-progress__fill {
+  height: 100%;
+  background: var(--accent);
+  transition: width 0.25s ease;
+}
+.quiz-progress__label {
+  margin: 0.4rem 0 0;
+  font-size: 0.9rem;
+  color: var(--text-dim);
+}
+
+/* Question — sits INSIDE the quiz box, so it has no card chrome of its own. */
+.question {
+  border: 0;
+  background: transparent;
+  padding: 0;
+  margin: 0;
+  min-inline-size: 0; /* allow option text to wrap inside the fieldset */
+}
+/* The prompt is now the fieldset's <legend> so screen readers announce it on
+ * entering the radio/checkbox group. Reset legend defaults so it renders as a
+ * full-width block heading. */
+.question__prompt {
+  display: block;
+  width: 100%;
+  padding: 0;
+  font-size: 1.08rem;
+  font-weight: 500;
+  margin: 0 0 0.5rem;
+}
+/* Category + type are demoted to a <p> connected to the legend via aria-describedby. */
+.question__meta {
+  display: flex;
+  gap: 0.6rem;
+  flex-wrap: wrap;
+  align-items: center;
+  font-size: 0.78rem;
+  margin: 0 0 1rem;
+}
+.question__cat {
+  color: var(--accent);
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+}
+.question__type {
+  color: var(--text-dim);
+  background: var(--surface-2);
+  padding: 0.05rem 0.5rem;
+  border-radius: 999px;
+}
+
+.question__options { list-style: none; margin: 0; padding: 0; display: grid; gap: 0.5rem; }
+.option {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.65rem;
+  background: var(--surface-2);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 0.7rem 0.85rem;
+}
+.option label { cursor: pointer; flex: 1; }
+.option input { margin-top: 0.25rem; width: 1.05rem; height: 1.05rem; flex: none; }
+.option--correct { border-color: var(--ok); background: var(--ok-bg); }
+.option--wrong { border-color: var(--bad); background: var(--bad-bg); }
+
+/* Feedback
+ * The live region is always in the DOM (so screen readers announce updates), but
+ * stays visually invisible and collapsed until populated via --filled. This avoids
+ * an empty styled box / gap while keeping the aria-live region present. */
+.question__feedback {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  border-radius: 8px;
+}
+.question__feedback--filled {
+  margin-top: 1rem;
+  padding: 0.85rem 1rem;
+  border: 1px solid var(--border);
+}
+.question__feedback--ok { background: var(--ok-bg); border-color: var(--ok); }
+.question__feedback--bad { background: var(--bad-bg); border-color: var(--bad); }
+.question__feedback--warn { background: var(--warn-bg); border-color: var(--warn); }
+
+.quiz-actions { display: flex; gap: 0.6rem; margin-top: 1.1rem; flex-wrap: wrap; }
+
+/* ---------- Results ---------- */
+.score-summary {
+  display: flex;
+  gap: 1rem;
+  align-items: stretch;
+  flex-wrap: wrap;
+  margin: 1rem 0;
+}
+.score-big, .band {
+  background: var(--surface-2);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 1rem 1.25rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.score-big {
+  background:
+    radial-gradient(120% 140% at 0% 0%, rgba(43, 134, 255, 0.16), transparent 60%),
+    var(--surface-2);
+}
+.score-big { flex: 1; min-width: 200px; }
+.score-pct { font-size: 2.4rem; font-weight: 800; line-height: 1; }
+.score-frac { color: var(--text-dim); margin-top: 0.25rem; }
+.band { min-width: 180px; align-items: flex-start; }
+.band__label { font-size: 1.4rem; font-weight: 800; }
+.band__hint { color: var(--text-dim); font-size: 0.85rem; }
+.band-novice { border-left: 4px solid var(--warn); }
+.band-practitioner { border-left: 4px solid var(--accent); }
+.band-expert { border-left: 4px solid var(--ok); }
+
+/* One-line guidance under the competency band (I3). */
+.band__guidance {
+  color: var(--text-dim);
+  margin: 0 0 1rem;
+  font-size: 0.95rem;
+}
+
+.new-best {
+  background: var(--ok-bg);
+  color: var(--ok);
+  border: 1px solid var(--ok);
+  border-radius: 999px;
+  padding: 0.05rem 0.55rem;
+  font-size: 0.8rem;
+  font-weight: 700;
+  margin-left: 0.4rem;
+}
+
+.breakdown {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 0.5rem 0 1.25rem;
+  font-size: 0.95rem;
+}
+.breakdown th, .breakdown td {
+  text-align: left;
+  padding: 0.55rem 0.6rem;
+  border-bottom: 1px solid var(--border);
+}
+.breakdown th { color: var(--text-dim); font-size: 0.82rem; text-transform: uppercase; letter-spacing: 0.04em; }
+.breakdown .num { text-align: right; font-variant-numeric: tabular-nums; }
+.row-weak td { background: var(--bad-bg); }
+.row-ok td:last-child { color: var(--ok); }
+
+/* Footnote for single-question categories (I1a). */
+.sparse-marker { color: var(--warn); font-weight: 700; }
+.breakdown-footnote {
+  color: var(--text-dim);
+  font-size: 0.82rem;
+  margin: -0.75rem 0 1.25rem;
+}
+.breakdown-footnote span { color: var(--warn); font-weight: 700; }
+
+.review-prompt {
+  background: var(--surface-2);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 1rem 1.1rem;
+  margin-bottom: 1.1rem;
+}
+.review-prompt--clear { border-left: 4px solid var(--ok); }
+.chips { display: flex; gap: 0.5rem; flex-wrap: wrap; margin-top: 0.6rem; }
+.chip {
+  appearance: none;
+  font: inherit;
+  cursor: pointer;
+  background: var(--surface-2);
+  color: var(--accent);
+  border: 1px solid var(--accent);
+  border-radius: 999px;
+  padding: 0.35rem 0.8rem;
+  font-size: 0.85rem;
+  font-weight: 600;
+}
+.chip:hover { background: var(--accent-strong); color: #fff; }
+
+footer.site {
+  border-top: 1px solid var(--border);
+  color: var(--text-dim);
+  font-size: 0.85rem;
+  margin-top: 2rem;
+}
+
+/* ---------- Responsive ---------- */
+@media (max-width: 540px) {
+  .score-pct { font-size: 2rem; }
+  .risk-card__toggle { flex-wrap: wrap; }
+}
+
+/* Respect reduced-motion preferences. */
+@media (prefers-reduced-motion: reduce) {
+  * { transition: none !important; scroll-behavior: auto !important; }
+}

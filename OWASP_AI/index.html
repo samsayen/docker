@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description"
+        content="Learn and self-assess on the OWASP Top 10 for LLM Applications (2025)." />
+  <title>OWASP Top 10 for LLM Applications (2025) — Learn &amp; Score</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <header class="site">
+    <div class="wrap">
+      <h1>OWASP Top 10 for LLM Applications <span class="accent-dot" aria-hidden="true">·</span> 2025</h1>
+      <p class="subtitle">A technical primer and self-assessment for engineers building with LLMs.</p>
+
+      <div class="tablist" role="tablist" id="tablist" aria-label="Sections">
+        <button class="tab" role="tab" id="tab-learn" aria-selected="true"
+                aria-controls="view-learn" tabindex="0">Learn</button>
+        <button class="tab" role="tab" id="tab-quiz" aria-selected="false"
+                aria-controls="view-quiz" tabindex="-1">Quiz</button>
+      </div>
+    </div>
+  </header>
+
+  <main id="main" class="wrap">
+
+    <!-- ===================== LEARN VIEW ===================== -->
+    <section id="view-learn" role="tabpanel" aria-labelledby="tab-learn">
+      <h2>Learn the 10 risks</h2>
+      <p class="lead">
+        Each card expands to a concise definition, a concrete attack scenario, and key mitigations.
+        Source: OWASP Top 10 for Large Language Model Applications, 2025.
+      </p>
+      <div class="learn-toolbar">
+        <button type="button" class="btn btn--ghost" id="expand-all" aria-expanded="false"
+                aria-controls="learn-cards">Expand all</button>
+      </div>
+      <div id="learn-cards"><!-- populated by app.js --></div>
+    </section>
+
+    <!-- ===================== QUIZ VIEW ===================== -->
+    <section id="view-quiz" role="tabpanel" aria-labelledby="tab-quiz" hidden>
+      <h2>Test your knowledge</h2>
+
+      <!-- Intro -->
+      <div id="quiz-intro" class="quiz-intro">
+        <p class="lead">
+          20 technical questions across all 10 risks: single-answer, multi-select, and
+          scenario-matching. You get immediate feedback after each question.
+        </p>
+        <div class="callout">
+          <strong>Scoring:</strong> single-answer and scenario questions award 1 point for the
+          correct choice. Multi-select questions are <strong>all-or-nothing</strong> — you must
+          select every correct option and no incorrect ones to earn the point. Question and option
+          order are shuffled on every attempt.
+        </div>
+        <p id="intro-best" hidden></p>
+        <button type="button" class="btn btn--primary" id="start-quiz">Start quiz</button>
+      </div>
+
+      <!-- Runner (one question at a time) -->
+      <div id="quiz-runner" hidden><!-- populated by app.js --></div>
+
+      <!-- Results -->
+      <div id="quiz-results" hidden><!-- populated by app.js --></div>
+    </section>
+
+  </main>
+
+  <footer class="site">
+    <div class="wrap">
+      <p>
+        Educational tool. Content adapted from the OWASP Top 10 for LLM Applications (2025).
+        Runs fully offline — no data leaves your browser; progress is stored in localStorage.
+      </p>
+    </div>
+  </footer>
+
+  <script src="app.js"></script>
+</body>
+</html>

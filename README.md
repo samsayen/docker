@@ -5,6 +5,7 @@ A personal play area for Docker projects — experiments, learning exercises, an
 ## What's here
 
 - **CIA_TRADECRAFT_PRIMER/** — A small web app (with a `Dockerfile`) built around the declassified CIA Tradecraft Primer.
+- **OWASP_AI/** — A single-page app (with a `Dockerfile`) that teaches and quizzes you on the OWASP Top 10 for LLM Applications (2025).
 
 More projects will land in their own top-level directories as they get built.
 
